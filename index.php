@@ -2,7 +2,19 @@
 
 require_once __DIR__ . "/database.php";
 
+$filteredMatches = [];
 
+if(isset($_GET['city'])){
+  foreach($matches as $game){
+    if(strtoupper($game['city'] ) == strtoupper($_GET['city'])){
+       $filteredMatches[] = $game;
+    }
+  }
+}
+
+else{
+  $filteredMatches = $matches;
+}
 ?>
 
 
@@ -22,7 +34,7 @@ require_once __DIR__ . "/database.php";
  </header>
 
  <?php
- foreach($matches as $match){ ?>
+ foreach($filteredMatches as $match){ ?>
 
     <div class="match-container">
     <div class="text-team">
